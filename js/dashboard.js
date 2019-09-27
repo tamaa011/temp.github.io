@@ -234,3 +234,8 @@
 
   });
 })(jQuery);
+
+    $(function(){
+  $(".sidebar").load("nav.html");
+});
+
