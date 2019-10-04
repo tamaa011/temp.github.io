@@ -23,8 +23,61 @@ $(document).ready(function () {
       });
     }
   });
+// privacy 
+      var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+      document.getElementById("demo").innerHTML = myObj.data.text;
+    }
+  };
+  xhttp.open("POST", "https://hidden-ocean-87285.herokuapp.com/policyAndPrivacy/getPolicyAndPrivacy", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("type=privacy");
+// terms 
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+      document.getElementById("demo").innerHTML = myObj.data.text;
+    }
+  };
+  xhttp.open("POST", "https://hidden-ocean-87285.herokuapp.com/policyAndPrivacy/getPolicyAndPrivacy", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("type=service");
+// list halls
+     $('#hall').DataTable({
+
+    "scrollX": true,
+    "ajax": {
+      "url": "https://hidden-ocean-87285.herokuapp.com/halls/listHalls",
+      "type": "POST"
+    },
+      
+    "columns": [
+      { "data": "_id" },
+      { "data": "hallName" },
+      { "data": "hallCategory.name" },
+      { "data": "hallsAverageRating" },
+      { "data": "hallsRatingCounter" },
+      { "data": "hallImage" },
+      { "data": "formatedDate" },
+         {
+      "data": null,
+        'render': function (data, type, row) {
+          var id = "'"+data._id.toString()+"'";
+            return '<input id="btnEdit" type="button" onclick="HallDetails(' + id +');" value="Details" />' +
+            '<input id="btnEdit"  type="button" onclick="EditHalls(' + id + ')" value="Update" />' + 
+            '<input id="btnEdit" type="button" onclick="DeleteHalls(' + id + ')" value="Delete" />';
+                
+
+            
+        }
+    }
+    ]
+      
+});
     });
-//add new admin
+    //add new admin
   function AddNewAdmin(){
       
     $.ajax({
@@ -60,4 +113,114 @@ $(document).ready(function () {
   }
       }
   });
+  }
+//send notifications
+  function sendNotification() {
+    var token = window.localStorage.getItem('token');
+          var $title = $("#Title");
+          var $body = $("#body");
+          var title = $title.val().trim();
+          var body = $body.val().trim();
+      if(title < 1){
+          alert("Please Fill the Title field")
+      }else if(body < 1){
+          alert("Please Fill the Body field")
+      }else{
+    $.ajax({
+      url: "https://hidden-ocean-87285.herokuapp.com/notification/pushNotification",
+      method: "POST",
+      data: {
+        title: $("#Title").val(),
+        body: $("#body").val()
+      },
+      beforeSend: function (xhr) {
+        /* Authorization header */
+        xhr.setRequestHeader('authorization', 'Bearer ' + token);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      },
+      success: function (data) {
+        alert(data.message);
+          window.location.href = 'Sendnotification.html'
+      },
+      error: function (data) {
+        alert(data.message);
+      }
+
+    });}
+
+  }
+// send privacy 
+    //edit
+    function editT() {
+        document.getElementsByTagName("textarea")[0].removeAttribute("disabled"); 
+        document.getElementById("ed").style.display = "none";
+        document.getElementById("pri").removeAttribute("disabled"); 
+}
+        
+    //savePrivacy
+      function savePrivacy() {
+    var token = window.localStorage.getItem('token');
+
+    $.ajax({
+      url: "https://hidden-ocean-87285.herokuapp.com/policyAndPrivacy/addPolicyAndPrivacy",
+      method: "POST",
+        
+      data: {
+        text: $("#demo").val(),
+          type: "privacy"
+        
+      },
+      beforeSend: function (xhr) {
+        /* Authorization header */
+        xhr.setRequestHeader('authorization', 'Bearer ' + token);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      },
+      success: function (data) {
+        alert(data.message);
+          window.location.href = 'Privacypolicy.html'
+      },
+      error: function (data) {
+        alert(data.message);
+          window.location.href = 'Privacypolicy.html'
+      }
+
+    });
+      }
+// terms
+    //edit
+function editP() {
+        document.getElementsByTagName("textarea")[0].removeAttribute("disabled"); 
+        document.getElementById("bt").removeAttribute("disabled"); 
+        document.getElementById("it").style.display = "none";
+        
+}
+    
+    //saveTerms
+      function saveTerms() {
+    var token = window.localStorage.getItem('token');
+    $.ajax({
+      url: "https://hidden-ocean-87285.herokuapp.com/policyAndPrivacy/addPolicyAndPrivacy",
+      method: "POST",
+        
+      data: {
+        text: $("#demo").val(),
+          type: "service"
+        
+      },
+      beforeSend: function (xhr) {
+        /* Authorization header */
+        xhr.setRequestHeader('authorization', 'Bearer ' + token);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      },
+      success: function (data) {
+        alert(data.message);
+          window.location.href = 'Termsofservice.html'
+      },
+      error: function (data) {
+        alert(data.message);
+          window.location.href = 'Termsofservice.html'
+      }
+
+    });
+
   }
