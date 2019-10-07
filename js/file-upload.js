@@ -5,24 +5,6 @@
 });
 $(document).ready(function () {
 
-      obj = { table: "customers", limit: 20 };
-  $.ajax({
-    url: "https://hidden-ocean-87285.herokuapp.com/roles/listRoles",
-    method: "POST",
-    data: {
-      x: JSON.stringify(obj)
-    },
-    beforeSend: function (xhr) {
-      /* Authorization header */
-      xhr.setRequestHeader('authorization', 'Bearer ' + token);
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    },
-    success: function (data) {
-      $.each(data.data, function (i, obj) {
-        $('.roles').append($('<option>').text(obj.role).attr('value', obj._id));
-      });
-    }
-  });
 // privacy 
       var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -45,7 +27,7 @@ $(document).ready(function () {
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("type=service");
 // list halls
-     $('#hall').DataTable({
+  $('#example').DataTable({
 
     "scrollX": true,
     "ajax": {
@@ -75,7 +57,239 @@ $(document).ready(function () {
     }
     ]
       
-});
+  });
+// list halls category 
+    
+  $('#exampleCategories').DataTable({
+
+    "scrollX": true,
+
+    "ajax": {
+      "url": "https://hidden-ocean-87285.herokuapp.com/category/listCategories",
+      "type": "POST",
+      beforeSend: function (xhr) {
+        /* Authorization header */
+        xhr.setRequestHeader('authorization', 'Bearer ' + token);
+      },
+    },
+    "columns": [
+      { "data": "_id" },
+      { "data": "name" }
+    ]
+  });
+//search by name
+      $('#exampleName').DataTable({
+    "scrollX": true,
+    "ajax": {
+      "url": "https://hidden-ocean-87285.herokuapp.com/halls/searchByName",
+      "type": "POST"
+    },
+    "columns": [
+      { "data": "_id" },
+      { "data": "hallName" },
+      { "data": "hallCategory.name" },
+      { "data": "hallsAverageRating" },
+      { "data": "hallPrice" },
+      { "data": "hallPhoneNumber" }
+    ]
+  });
+//search by category 
+      var token = window.localStorage.getItem('token');
+  obj = { table: "customers", limit: 20 };
+      $.ajax({
+    url: "https://hidden-ocean-87285.herokuapp.com/category/listCategories",
+    method: "POST",
+    data: {
+      x: JSON.stringify(obj)
+    },
+    beforeSend: function (xhr) {
+      /* Authorization header */
+      xhr.setRequestHeader('authorization', 'Bearer ' + token);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    },
+    success: function (data) {
+      $.each(data.data, function (i, obj) {
+        
+        $('#SearchByCategory').append($('<option>').text(obj.name).attr('value', obj._id));
+
+        $('#demo').append($('<option>').text(obj.name).attr('value', obj._id));
+      });
+    }
+  });
+  function SearchByCategory(){
+    $('#exampleCategory').DataTable({
+
+      "scrollX": true,
+      "ajax": {
+        "url": "https://hidden-ocean-87285.herokuapp.com/halls/searchByCategory",
+        "type": "POST",
+        data : {
+          hallCategory : document.getElementById("SearchByCategory").value //this 
+        }
+      },
+      "columns": [
+        { "data": "_id" },
+        { "data": "hallName" },
+        { "data": "hallCategory.name" },
+        { "data": "hallsAverageRating" },
+        { "data": "hallPrice" },
+        { "data": "hallPhoneNumber" }
+      ]
+    });
+  }
+
+      obj = { table: "customers", limit: 20 };
+  $.ajax({
+    url: "https://hidden-ocean-87285.herokuapp.com/roles/listRoles",
+    method: "POST",
+    data: {
+      x: JSON.stringify(obj)
+    },
+    beforeSend: function (xhr) {
+      /* Authorization header */
+      xhr.setRequestHeader('authorization', 'Bearer ' + token);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    },
+    success: function (data) {
+      $.each(data.data, function (i, obj) {
+        $('.roles').append($('<option>').text(obj.role).attr('value', obj._id));
+      });
+    }
+  });
+  //users 
+ $('#exampleUsers').DataTable({
+    "scrollX": true,
+    "ajax": {
+      "url": "https://hidden-ocean-87285.herokuapp.com/users",
+      "type": "POST",
+      beforeSend: function (xhr) {
+        /* Authorization header */
+        xhr.setRequestHeader('authorization', 'Bearer ' + token);
+      },
+
+      error: function (data) {
+        if (data.statusText == "Bad Request") {
+          localStorage.setItem("token", data.responseJSON.token);
+          listuser();
+        }
+      }
+    },
+    "columns": [
+      { "data": "userName" },
+      { "data": "userEmail" },
+      { "data": "_id" },
+      { "data": "formatedDate" }
+    ]
+  });
+
+
+  function listuser() {
+    $('#exampleUsers').html('');
+    $('#exampleUsers').DataTable({
+      "scrollX": true,
+      "ajax": {
+        "url": "https://hidden-ocean-87285.herokuapp.com/users",
+        "type": "POST",
+        beforeSend: function (xhr) {
+          /* Authorization header */
+          xhr.setRequestHeader('authorization', 'Bearer ' + token);
+        },
+        error: function (data) {
+          if (data.statusText == "Bad Request") {
+            localStorage.setItem("token", data.responseJSON.token);
+          }
+        }
+
+      },
+      "columns": [
+        { "data": "_id" },
+        { "data": "userName" },
+        { "data": "userEmail" },
+          { "data": "formatedDate" }
+      ]
+    });
+  }
+// list admins 
+      $('#exampleAdmin').DataTable({
+
+    "scrollX": true,
+
+    "ajax": {
+      "url": "https://hidden-ocean-87285.herokuapp.com/users/listSystemUsers",
+      "type": "POST",
+      beforeSend: function (xhr) {
+        /* Authorization header */
+        xhr.setRequestHeader('authorization', 'Bearer ' + token);
+      },
+    },
+    "columns": [
+      { "data": "userName" },
+      { "data": "userEmail" },
+      { "data": "userRole.role" },
+      { "data": "_id" },
+        { "data": "formatedDate" },
+                 {
+      "data": null,
+        'render': function (data, type, row) {
+          var id = "'"+data._id.toString()+"'";
+            return '<input id="btnEdit" type="button" onclick="DeleteAdmins(' + id + ')" value="Delete" />';
+            
+        }
+    }
+    ]
+  });
+// list feedback
+        //list feedback
+      $('#exampleFeedBack').DataTable({
+    "scrollX": true,
+    "ajax": {
+      "url": "https://hidden-ocean-87285.herokuapp.com/feedback/listFeedback",
+      "type": "POST",
+      beforeSend: function (xhr) {
+        /* Authorization header */
+        xhr.setRequestHeader('authorization', 'Bearer ' + token);
+      },
+
+      error: function (data) {
+        if (data.statusText == "Bad Request") {
+          localStorage.setItem("token", data.responseJSON.token);
+          listuser();
+        }
+      }
+    },
+    "columns": [
+      { "data": "email" },
+      { "data": "text" },
+        { "data": "formatedDate" }
+    ]
+  });
+
+
+  function listfeedback() {
+    alert("list feedback , mean that have an error");
+    $('#exampleFeedBack').html('');
+    $('#exampleFeedBack').DataTable({
+      "scrollX": true,
+      "ajax": {
+        "url": "https://hidden-ocean-87285.herokuapp.com/users",
+        "type": "POST",
+        beforeSend: function (xhr) {
+          /* Authorization header */
+          xhr.setRequestHeader('authorization', 'Bearer ' + token);
+        },
+        error: function (data) {
+          if (data.statusText == "Bad Request") {
+            localStorage.setItem("token", data.responseJSON.token);
+          }
+        }
+
+      },
+      "columns": [
+        { "data": "email" },
+        { "data": "text" }
+      ]
+    });
+  }
     });
     //add new admin
   function AddNewAdmin(){
@@ -224,3 +438,71 @@ function editP() {
     });
 
   }
+//search by category
+function SearchByCategory(){
+  $('#SearchByCategoryTable').DataTable({
+
+    "scrollX": true,
+    "bDestroy": true,
+    "ajax": {
+      "url": "https://hidden-ocean-87285.herokuapp.com/halls/searchByCategory",
+      "type": "POST",
+      data : {
+        hallCategory : document.getElementById("SearchByCategory").value
+      }
+    },
+    "columns": [
+      { "data": "_id" },
+      { "data": "hallName" },
+      { "data": "hallsAverageRating" },
+      { "data": "hallsRatingCounter" },
+      { "data": "hallImage" },
+      { "data": "formatedDate" },
+         {
+      "data": null,
+        'render': function (data, type, row) {
+          var id = "'"+data._id.toString()+"'";
+            return '<input  id="btnEdit" type="button" onclick="HallDetails(' + id +');" value="Details" />' +
+            '<input id="btnEdit" type="button" onclick="EditHalls(' + id + ')" value="Update" />' + 
+            '<input id="btnEdit" type="button" onclick="DeleteHalls(' + id + ')" value="Delete" />';
+            
+        }
+    }
+    ]
+  });
+}
+//search by name
+function SearchByName(){
+
+  $('#SearchByName').DataTable({
+
+    "scrollX": true,
+    "bDestroy": true,
+    "ajax": {
+      "url": "https://hidden-ocean-87285.herokuapp.com/halls/searchByName",
+      "type": "POST",
+      data : { 
+        hallName : document.getElementById("SearchByName_Name").value
+      }
+    },
+    "columns": [
+      { "data": "_id" },
+      { "data": "hallName" },
+      { "data": "hallCategory.name" },
+      { "data": "hallsAverageRating" },
+      { "data": "hallsRatingCounter" },
+      { "data": "hallImage" },
+      { "data": "formatedDate" },
+         {
+      "data": null,
+        'render': function (data, type, row) {
+          var id = "'"+data._id.toString()+"'";
+            return '<input  id="btnEdit" type="button" onclick="HallDetails(' + id +');" value="Details" />' +
+            '<input id="btnEdit" type="button" onclick="EditHalls(' + id + ')" value="Update" />' + 
+            '<input id="btnEdit" type="button" onclick="DeleteHalls(' + id + ')" value="Delete" />';
+            
+        }
+    }
+    ]
+  });
+}

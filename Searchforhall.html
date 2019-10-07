@@ -112,8 +112,12 @@
                   <p class="card-description">
                     Add class <code>.table-striped</code>
                   </p>
+                            <div class="search-container">
+      <input type="text" id="SearchByName_Name" placeholder="Name" name="hallName" required>
+      <button id="submit" onclick="SearchByName()" value="Search">Search</button>
+        </div>
                   <div class="table-responsive">
-                      <table id="example" class="table table-striped table-bordered" style="width: 100%;">
+                      <table id="SearchByName" class="table table-striped table-bordered" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>ID</th>
