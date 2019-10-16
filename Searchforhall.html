@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- inject:css -->
-        <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
@@ -109,40 +109,25 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Striped Table</h4>
-                  <p class="card-description">
-                    Add class <code>.table-striped</code>
-                  </p>
                             <div class="search-container">
       <input type="text" id="SearchByName_Name" placeholder="Name" name="hallName" required>
       <button id="submit" onclick="SearchByName()" value="Search">Search</button>
         </div>
                   <div class="table-responsive">
-                      <table id="SearchByName" class="table table-striped table-bordered" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Rating</th>
-                                <th>Rate Counter</th>
-                                <th>Images</th>
-                                <th>Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Rating</th>
-                                <th>Rate Counter</th>
-                                <th>Images</th>
-                                <th>Date</th>
-                                <th class="edd"></th>
-                            </tr>
-                        </tfoot> 
-                      </table>
+                    <table id="SearchByName" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Rating</th>
+                <th>Rate Counter</th>
+                <th>Images</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -176,10 +161,9 @@
   <script src="js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>	
+  <script src="js/searchbyname.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>	
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script src="js/file-upload.js"></script>
-
 	
   <!-- End custom js for this page-->
 </body>
