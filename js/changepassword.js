@@ -8,7 +8,7 @@
     method: "POST",
     data: {
         userPassword: $("#name").val(),
-        newPassword: $("#re").val(),
+        newPassword: $("#re").val(), 
         rePassword: $("#new").val(),
         
     },
@@ -18,13 +18,7 @@
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     },
     success: function (data) {
-      var response = JSON.stringify(data);
-        response = JSON.parse(response);
-      var message="";
-      $.each(response.responseJSON.message, function (i, obj) {
-        message+= " , " + obj.message;
-      });
-       alert(message);
+       alert("user password updated");
         window.location.href = 'changePassword.html'
     },
       error: function (data) {
