@@ -1,3 +1,5 @@
+$.getScript( "js/simpleUpload.js");
+        
 
 var halldata;
 var token = window.localStorage.getItem('token');
@@ -6,23 +8,8 @@ var token = window.localStorage.getItem('token');
   $(".sidebar").load("nav.html");
 });
 $(document).ready(function () {
-  $('#exampleName').DataTable({
 
-    "scrollX": true,
-    "ajax": {
-      "url": "https://hidden-ocean-87285.herokuapp.com/halls/searchByName",
-      "type": "POST"
-    },
-    "columns": [
-      { "data": "_id" },
-      { "data": "hallName" },
-      { "data": "hallCategory.name" },
-      { "data": "hallsAverageRating" },
-      { "data": "hallPrice" },
-      { "data": "hallPhoneNumber" }
-    ]
-  });
-       if(id != null){
+   if(id != null){
   $.ajax({
     url: "https://hidden-ocean-87285.herokuapp.com/halls/"+id,
     method: "get",
@@ -66,46 +53,9 @@ upload(SERVER_URL,IMAGES_UPLOAD_URL,$fileInputElement);
 
     
   })
-        });
-//search by name       
+});
 
-function SearchByName(){
-
-  $('#SearchByName').DataTable({
-
-    "scrollX": true,
-    "bDestroy": true,
-    "ajax": {
-      "url": "https://hidden-ocean-87285.herokuapp.com/halls/searchByName",
-      "type": "POST",
-      data : { 
-        hallName : document.getElementById("SearchByName_Name").value,
-          limit : 2000,
-          offset : 0
-      }
-    },
-    "columns": [
-      { "data": "_id" },
-      { "data": "hallName" },
-      { "data": "hallCategory.name" },
-      { "data": "hallsAverageRating" },
-      { "data": "hallsRatingCounter" },
-      { "data": "hallImage.length" },
-      { "data": "formatedDate" },
-         {
-      "data": null,
-        'render': function (data, type, row) {
-          var id = "'"+data._id.toString()+"'";
-            return '<input  id="btnEdit" type="button" onclick="HallDetails(' + id +');" value="Details" />' +
-            '<input id="btnEdit" type="button" onclick="EditHalls(' + id + ')" value="Update" />' + 
-            '<input id="btnEdit" type="button" onclick="DeleteHalls(' + id + ')" value="Delete" />';
-            
-        }
-    }
-    ]
-  });
-}
-function upload(SERVER_URL,IMAGES_UPLOAD_URL,$fileInputElement) {
+    function upload(SERVER_URL,IMAGES_UPLOAD_URL,$fileInputElement) {
 
       $fileInputElement.simpleUpload(SERVER_URL + IMAGES_UPLOAD_URL, {
 
@@ -170,10 +120,12 @@ function updateHall(hallimage){
         data: requestBody,
         success: function (result) {
           alert("success");
+            window.location.href = 'updataHall.html'
           // CallBack(result);
         },
         error: function (error) {
           alert("error");
+            window.location.href = 'Listhalls.html'
         }
       });
 }
@@ -223,5 +175,5 @@ function EditHalls(id){
      
      localStorage.setItem("Id" , id);
 
-       window.open("searchbyname.html");
+       window.open("HallDetails.html");
   }

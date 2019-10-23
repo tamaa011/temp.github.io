@@ -98,56 +98,46 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Add New HALL</h4>
+                  <h4 class="card-title">Hall Details</h4>
                   <form class="forms-sample">
                     <div class="form-group">
                       <label for="exampleInputName1">Hall Name</label>
-                      <input type="text" class="form-control" id="name" placeholder="Hall Name" name="hallName" required>
+                      <input type="text" class="form-control" id="hdName" name="hallName" >
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Hall Adress</label>
-                      <input type="text" class="form-control" id="ha" placeholder="Hall Adress" name="hallAdress" required>
+                      <input type="text" class="form-control" id="hdAddress" name="hallAdress" >
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputCity1" >Categories</label>
-                        <select class="form-control" id="demo"><option  hidden>Choose Categories</option></select>
-                    </div>
-                        <!--category-->
                     <div class="form-group">
                       <label for="exampleInputPassword4">Hall Description</label>
-                        <textarea class="form-control" id="hd" placeholder="Hall Description" name="hallDescription" required rows="4"></textarea>
+                        <textarea class="form-control" id="hdDescription" name="hallDescription" required rows="4"></textarea>
                     </div>
                     <div class="form-group">
                       <label for="exampleSelectGender">Hall Price</label>
-                        <input type="text" class="form-control" id="hp" placeholder="Hall Price" name="hallPrice" required>
+                        <input type="text" class="form-control" id="hdPrice" name="hallPrice" >
                       </div>
 
                     <div class="form-group">
                       <label for="exampleInputCity1">Hall Location Long</label>
-                      <input type="text" class="form-control" id="hl" placeholder="Hall Location Long" name="hallLocationLong" required>
+                      <input type="text" class="form-control" id="hdLong" name="hallLocationLong" >
                     </div>
                     <div class="form-group">
                       <label for="exampleInputCity1">Hall Location Lat</label>
-                      <input type="text" class="form-control" id="hla" placeholder="Hall Location Lat" name="hallLocationLat" required>
+                      <input type="text" class="form-control" id="hdLat" name="hallLocationLat" required>
                     </div>
                     <div class="form-group">
                       <label for="exampleTextarea1">Hall Special Offers</label>
-                      <textarea class="form-control" id="hs" placeholder="Hall Special Offers" name="hallSpecialOffers" rows="4"></textarea>
+                      <textarea class="form-control" id="hdOffer"  name="hallSpecialOffers" rows="4"></textarea>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputCity1">Hall Phone Number</label>
-                      <input type="text" class="form-control" id="hpn" placeholder="Hall Phone Number" name="hallPhoneNumber" required>
+                      <input type="text" class="form-control" id="hdPhone" name="hallPhoneNumber" >
                     </div>
                     <div class="form-group">
-                      <label>File upload</label>
-                      <input type="file" name="img[]" class="file-upload-default" >
-                      <div class="input-group col-xs-12">
-                        <input type="file" class="form-control file-upload-info" name="hallImage"  placeholder="Upload Image" multiple>
-
+                      <label>Hall Image</label>
+                      <div class="input-group col-xs-12"  id="hdImages">
                       </div>
                     </div>
-                    <button type="button" id="submit" value="Send" onclick="upload()" class="btn btn-primary mr-2" >Add</button>
-                    <button class="btn btn-light">Cancel</button>
                   </form>
                 </div>
               </div>
@@ -174,8 +164,7 @@
   <script src="js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/uploadhall.js"></script>
-    <script type="text/javascript" src="js/simpleUpload.js"></script>
+  <script src="js/hallDetails.js"></script>
   <!-- End custom js for this page-->
 </body>
 

@@ -349,3 +349,26 @@ function editP() {
 
   }
 
+     function DeleteAdmins(id){
+    var token = window.localStorage.getItem('token');
+  $.ajax({
+    url: "https://hidden-ocean-87285.herokuapp.com/users/deleteAdmin",
+    method: "POST",
+        data: {
+      _id: id
+    },
+   
+    beforeSend: function (xhr) {
+      /* Authorization header */
+      xhr.setRequestHeader('authorization', 'Bearer ' + token);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    },
+    success: function (data) {
+      alert(data.message);
+         window.location.href = 'Listsystemadmins.html'
+    },
+        error: function (data) {
+      alert(data.message);
+    }
+  });
+  }
