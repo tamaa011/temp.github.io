@@ -29,6 +29,24 @@ $(document).ready(function () {
 
 
 // list halls category 
+          obj = { table: "customers", limit: 20 };
+    $.ajax({
+    url: "https://hidden-ocean-87285.herokuapp.com/roles/listRoles",
+    method: "POST",
+    data: {
+      x: JSON.stringify(obj)
+    },
+    beforeSend: function (xhr) {
+      /* Authorization header */
+      xhr.setRequestHeader('authorization', 'Bearer ' + token);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    },
+    success: function (data) {
+      $.each(data.data, function (i, obj) {
+        $('.roles').append($('<option>').text(obj.role).attr('value', obj._id));
+      });
+    }
+  });
     
   $('#exampleCategories').DataTable({
 
@@ -48,24 +66,7 @@ $(document).ready(function () {
     ]
   });
 
-      obj = { table: "customers", limit: 20 };
-  $.ajax({
-    url: "https://hidden-ocean-87285.herokuapp.com/roles/listRoles",
-    method: "POST",
-    data: {
-      x: JSON.stringify(obj)
-    },
-    beforeSend: function (xhr) {
-      /* Authorization header */
-      xhr.setRequestHeader('authorization', 'Bearer ' + token);
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    },
-    success: function (data) {
-      $.each(data.data, function (i, obj) {
-        $('.roles').append($('<option>').text(obj.role).attr('value', obj._id));
-      });
-    }
-  });
+
   //users 
  $('#exampleUsers').DataTable({
     "scrollX": true,

@@ -223,5 +223,5 @@ function EditHalls(id){
      
      localStorage.setItem("Id" , id);
 
-       window.open("searchbyname.html");
+       window.open("HallDetails.html");
   }

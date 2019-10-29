@@ -246,5 +246,5 @@ function EditHalls(id){
      
      localStorage.setItem("Id" , id);
 
-       window.open("listhallcategory.html");
+       window.open("HallDetails.html");
   }
