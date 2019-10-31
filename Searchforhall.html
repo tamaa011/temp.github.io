@@ -98,10 +98,11 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Search for hall</h4>
-                            <div class="search-container">
-      <input type="text" id="SearchByName_Name" placeholder="Name" name="hallName" required>
-      <button id="submit" onclick="SearchByName()" value="Search">Search</button>
-        </div>
+                            <div class="form-group">
+                            <input type="text" class="form-control" id="SearchByName_Name" placeholder="Name" name="hallName" required>
+                                <br>
+                            <button id="submit" onclick="SearchByName()" value="Search" class="btn btn-primary mr-2">Search</button>
+                            </div>
                   <div class="table-responsive">
                     <table id="SearchByName" class="table table-striped table-bordered">
         <thead>

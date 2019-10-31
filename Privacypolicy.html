@@ -99,10 +99,11 @@
                 <div class="card-body">
                   <h4 class="card-title">Privacy Policy</h4>
                     <div class="form-group">
-                      <button type="button" onclick="editT()" class="btn btn-primary mr-2" id="ed">Edit Terms of service</button>
+                      <button type="button" onclick="editT()" class="btn btn-primary mr-2" id="ed">Edit</button>
+                        <button type="button" onclick="savePrivacy()" class="btn btn-primary mr-2" id="pri" hidden>Save</button>
                         <br> <br>
-                      <textarea rows="22" style="width: 100%;" id="demo" disabled></textarea>
-                        <button type="button" onclick="savePrivacy()" class="btn btn-primary mr-2" id="pri" disabled>Save Privacy Policy</button>
+                      <div id="demo"></div>
+                      <textarea rows="22" style="width: 100%;" id="show" hidden></textarea>
                     </div>
                 </div>
               </div>
@@ -127,7 +128,7 @@
   <script src="js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/file-upload.js"></script>
+  <script src="js/privacy.js"></script>
   <!-- End custom js for this page-->
 </body>
 
