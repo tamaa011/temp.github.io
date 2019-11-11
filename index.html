@@ -37,9 +37,15 @@
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="pass" name="userPassword" placeholder="Password" required>
                 </div>
-                <div class="mt-3">
+                <div class="mt-3" id="lo">
                   <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="signIn()" style="color: white; cursor: pointer;">SIGN IN</a>
                 </div>
+                    <div id="loading" style="display: none;">
+                    <button class="btn btn-primary btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="button" disabled>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Loading...
+                    </button>
+                    </div>
               </form>
             </div>
           </div>
@@ -59,7 +65,10 @@
   <script src="js/template.js"></script>
   <script src="js/todolist.js"></script>
     <script>
+
 function signIn(){
+         document.getElementById("lo").style.display = "none";
+        document.getElementById("loading").style.display = "block";
             var userEmail=$("#name").val();
             var password=$("#pass").val();
             let requestBody = {
@@ -74,10 +83,12 @@ function signIn(){
             xhttp.setRequestHeader("Content-Type", "application/json");
     
     xhttp.onload  = function() {
-                if (this.readyState == 4 && this.status == 200) {   
-                    
-                }else{
-                    alert("Username or Password not correct");
+                if (this.readyState == 4 && this.status == 200) {  
+
+                }else { 
+                    document.getElementById("lo").style.display = "block";
+                    document.getElementById("loading").style.display = "none";
+                    setTimeout(function(){ alert("Username or Password not correct"); }, 200);
                 }
             
    var jsonResponse = JSON.parse(xhttp.responseText);

@@ -83,6 +83,8 @@ upload(SERVER_URL,IMAGES_UPLOAD_URL,$fileInputElement);
 
     }
 function updateHall(hallimage){
+        document.getElementById("UpdateHallSubmit").style.display = "none";
+        document.getElementById("loading").style.display = "inline";
       var hallName = $("#Updatedhallname").val();
       var hallAdress = $("#UpdatedHallAdress").val();
       var hallCategory = $("#hc").val();
@@ -124,6 +126,8 @@ function updateHall(hallimage){
           // CallBack(result);
         },
         error: function (error) {
+        document.getElementById("lo").style.display = "block";
+        document.getElementById("loading").style.display = "none";
           alert("error");
             window.location.href = 'Listhalls.html'
         }

@@ -35,7 +35,7 @@
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face44.png" alt="profile"/>
+              <img src="images/faces/face44.png" alt="profile"/> <i class="ti-arrow-down"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item" href="changePassword.html">
@@ -133,8 +133,14 @@
                       <label for="exampleInputCity1">Hall Phone Number</label>
                       <input type="text" class="form-control" id="Updatedhallphone" placeholder="Hall Phone Number" name="hallPhoneNumber">
                     </div>
-                    <button type="button" onclick="updateHall()" id="UpdateHallSubmit" value="Send" class="btn btn-primary mr-2">Update</button>
+                    <button type="button" onclick="updateHall()" id="UpdateHallSubmit" value="Send" class="btn btn-primary mr-2" >Update</button>
+                    <button class=" btn btn-primary mr-2" type="button" disabled style="display: none;" id="loading">
+                      <span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>
+                      Loading...
+                    </button>
                     <button class="btn btn-light">Cancel</button>
+
+
                   </form>
                 </div>
               </div>
